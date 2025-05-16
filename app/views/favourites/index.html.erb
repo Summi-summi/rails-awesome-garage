@@ -1,0 +1,9 @@
+<h1>Your Garage</h1>
+<ul>
+  <% @favourites.each do |fave| %>
+    <li>
+      <%= link_to "#{fave.car.brand} #{fave.car.model} (#{fave.car.year}) #{fave.car.fuel}" , car_path(fave.car) %>
+      <%= button_to "Remove", car_favourite_path(fave.car), method: :delete %>
+    </li>
+  <% end %>
+</ul>

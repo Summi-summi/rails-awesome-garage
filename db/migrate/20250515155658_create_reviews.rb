@@ -3,8 +3,7 @@ class CreateReviews < ActiveRecord::Migration[7.1]
     create_table :reviews do |t|
       t.text :comment
       t.integer :rating
-      t.string :car
-      t.string :references
+      t.references :car, null: false, foreign_key: true
 
       t.timestamps
     end

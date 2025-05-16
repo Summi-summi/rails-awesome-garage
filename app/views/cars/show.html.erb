@@ -1,0 +1,29 @@
+<h1><%= @car.brand %> <%= @car.model %> (<%= @car.year %>) <%= @car.fuel %></h1>
+<p><strong>Owner:</strong> <%= @car.owner.nickname %></p>
+
+<hr>
+
+<h2>Reviews</h2>
+<% @car.reviews.each do |review| %>
+  <p><%= review.comment %></p>
+<% end %>
+
+<h3>Add a Review</h3>
+<%= simple_form_for([@car, @review]) do |f| %>
+  <%= f.input :comment, label: "Your Review" %>
+  <%= f.button :submit, "Submit Review" %>
+<% end %>
+
+<hr>
+
+<h2>Garage</h2>
+<% if @car.favourite %>
+  <p>This car is in your garage.</p>
+  <%= button_to "Remove from Garage", car_favourite_path(@car), method: :delete %>
+<% else %>
+  <%= simple_form_for([@car, @favourite]) do |f| %>
+    <%= f.button :submit, "Add to Garage" %>
+  <% end %>
+<% end %>
+
+<%= link_to "Back to All Cars", cars_path %>
