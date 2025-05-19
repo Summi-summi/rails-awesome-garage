@@ -11,18 +11,25 @@
 <h3>Add a Review</h3>
 <%= simple_form_for([@car, @review]) do |f| %>
   <%= f.input :comment, label: "Your Review" %>
+  <%= f.input :rating, collection: 1..5, label: "Rating" %>
   <%= f.button :submit, "Submit Review" %>
 <% end %>
 
 <hr>
 
+<% @car.reviews.each do |review| %>
+  <%= review.comment %>
+  <%= "⭐" * review.rating %>
+<% end %>
+
+
 <h2>Garage</h2>
 <% if @car.favourite %>
-  <p>This car is in your garage.</p>
-  <%= button_to "Remove from Garage", car_favourite_path(@car), method: :delete %>
+  <p>This car is in your favourite garage.</p>
+  <%= button_to "Remove from favourite Garage", car_favourite_path(@car), method: :delete %>
 <% else %>
   <%= simple_form_for([@car, @favourite]) do |f| %>
-    <%= f.button :submit, "Add to Garage" %>
+    <%= f.button :submit, "Add to Favourite Garage" %>
   <% end %>
 <% end %>
 
